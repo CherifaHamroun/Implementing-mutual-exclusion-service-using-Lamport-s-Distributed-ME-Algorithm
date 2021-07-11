@@ -1,20 +1,20 @@
 # Implementing-mutual-exclusion-service-using-Lamport-s-Distributed-ME-Algorithm
 Implementing a Totally Ordered Broadcast Service using Lamport's Mutual Exclusion Algorithm
 
-# Project Description
+## Project Description
 Implementing a mutual exclusion service using Lamport’s distributed mutual exclusion algorithm. The service provides two function calls to the application: csEnter() and csLeave(). The first function call csEnter() allows an application to request permission to start executing its critical section. The function call is blocking and returns only when the invoking application can execute its critical section. The second function call csLeave() allows an application to inform the service that it has finished executing its critical section.
 Mutual exclusion service is used to implement a totally ordered broadcast service in which every process delivers broadcast messages sent using the service in the same order. Note that even the sender will deliver its own broadcast message it sends using the service. The broadcast service supports two function calls: tobSend() and tobReceive(). The first function call tobSend(String m) allows an application to broadcast a message m to all processes (including itself). The function call is non-blocking and returns as soon as the broadcast service has copied the message into its buffer. The second function call tobReceive() allows an application to deliver a message. The function call is blocking and returns only when there is a message waiting to be received.
 
-# Implementation Details
+## Implementation Details
 The program is designed in such a way so that each process or node consists of three separate modules organized in a hierarchical fashion. The top module implements the application (broadcasts and delivers messages). The middle module implements the totally ordered broadcast service. The bottom module implements the mutual exclusion service. The top two modules interact using tobSend() and tobReceive() functions. The bottom two modules interact using csEnter() and csExit() functions. It should be possible to swap the implementation of a module in the program with someone else's own implementation of the same module, and program still compiles and runs correctly!
 
 Application:
 Each node broadcasts a certain number of messages one-by-one using the totally ordered broadcast service. Note that multiple nodes may invoke tobSend() function concurrently. A message contains a number chosen uniformly at random. Every node maintains a separate output file that stores the values received by that node in the order in which they are received with each value stored on a separate line.
 
-# Configuration Format
+## Configuration Format
 The program runs using a configuration file in the following format:
 The configuration file is a plain-text formatted file. Only lines which begin with an unsigned integer are considered to be valid. Lines which are not valid are ignored. The configuration file contains n + 1 valid lines. The first valid line of the configuration file contains three tokens. The first token is the number of nodes in the system. The second token is the number of messages each node will broadcast. The third token is the minimum delay between two consecutive invocations of tobSend() function by the same node. After the first valid line, the next n lines consist of three tokens. The first token is the node ID. The second token is the host-name of the machine on which the node runs. The third token is the port on which the node listens for incoming connections. The parser is robust - concerning leading and trailing white space or extra lines at the beginning or end of file, as well as interleaved with valid lines. The # character denotes a comment. On any valid line, any characters after a # character is ignored.
 
-# Output Format
+## Output Format
 If the configuration file is named <config_name>.txt and is configured to use n nodes, then the program outputs n output files, named in according to the following format: <config_name>-<node_id>.out, where node_id ∈ {0, ..., n − 1}.
 The output file for process j is named <config_name>-j.out and contains the following: If there are n nodes in the system, and each node sent k messages, then there will be nk lines in total. The ith line consists of the ith random number which was received by process j via totally-ordered broadcast.
