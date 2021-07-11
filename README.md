@@ -1,4 +1,4 @@
-# Implementing-mutual-exclusion-service-using-Lamport-s-Distributed-ME-Algorithm
+s# Implementing-mutual-exclusion-service-using-Lamport-s-Distributed-ME-Algorithm
 Implementing a Totally Ordered Broadcast Service using Lamport's Mutual Exclusion Algorithm
 
 ## Project Description
@@ -8,7 +8,7 @@ Mutual exclusion service is used to implement a totally ordered broadcast servic
 ## Implementation Details
 The program is designed in such a way so that each process or node consists of three separate modules organized in a hierarchical fashion. The top module implements the application (broadcasts and delivers messages). The middle module implements the totally ordered broadcast service. The bottom module implements the mutual exclusion service. The top two modules interact using tobSend() and tobReceive() functions. The bottom two modules interact using csEnter() and csExit() functions. It should be possible to swap the implementation of a module in the program with someone else's own implementation of the same module, and program still compiles and runs correctly!
 
-Application:
+#### Application:
 Each node broadcasts a certain number of messages one-by-one using the totally ordered broadcast service. Note that multiple nodes may invoke tobSend() function concurrently. A message contains a number chosen uniformly at random. Every node maintains a separate output file that stores the values received by that node in the order in which they are received with each value stored on a separate line.
 
 ## Configuration Format
